@@ -38,17 +38,32 @@ const initialTodosList = [
 ]
 
 class SimpleTodos extends Component {
-  state = {isSearch: ''}
+  state = {isSearch: '', userDetails: initialTodosList}
+
+  onChangeSearch = event => {
+    this.setState({isSearch: event.target.value})
+  }
+
+  deleteUser = id => {
+    const {userDetails} = this.state
+    const filterUserData = userDetails.filter(each => each.id !== id)
+    this.setState({userDetails: filterUserData})
+  }
 
   render() {
-    const {isSearch} = this.state
+    const {isSearch, userDetails} = this.state
+
+    const searchResults = userDetails.filter(eachUser =>
+      eachUser.name.includes(isSearch),
+    )
+
     return (
       <div className="main-div">
         <div className="sub-div">
           <h1 className="heading">Simple Todos</h1>
           <ul>
-            {initialTodosList.map(eachItem => (
-              <TodoItem userDetails={eachItem} />
+            {searchResults.map(eachItem => (
+              <TodoItem userDetails={eachItem} key={eachItem.id} />
             ))}
           </ul>
         </div>

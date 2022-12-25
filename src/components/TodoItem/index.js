@@ -6,12 +6,12 @@ const TodoItem = props => {
   const {title} = userDetails
 
   return (
-    <div className="Todo">
+    <li className="Todo">
       <p className="para">{title}</p>
       <button type="button" className="button">
         Delete
       </button>
-    </div>
+    </li>
   )
 }
 
